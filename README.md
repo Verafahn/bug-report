@@ -1,7 +1,11 @@
 # Bug Report
 
-If a project not include `build.zig.zon` and it is used to as a dependency of another project, if it include a binary file, Zig will not build it success.
+If a project contains symbolic links (symlinks), it cannot be successfully fetched by the `zig fetch` command.
 
-Zig maybe connot hash binary file cause it.
+Here is a minimal example: a project that includes a symlink pointing to the `README` file. When you attempt to fetch it with `zig fetch`, the following error occurs:
 
-such as this project.
+```
+error: unable to hash 'README': Unexpected
+```
+
+This issue may prove fatal to compatibility with the C/C++ ecosystem.
